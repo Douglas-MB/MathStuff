@@ -2,43 +2,25 @@ import java.util.Arrays;
 
 public class PrimeNumber {
 
-    public int[] breakNum(int value){
-        int divDec=1;
-        int restHigh;
-        int restLow;
-        int[] aux =  new int[11];
-        int i =0;
-        int copyValue = value;
+    private String breakNum(int value){
+        return ""+value;
+    }
+    public String decimalForm(){
+        String aux = breakNum(MyTools.rng(999999999));
+        String decNum="";
+        int cnt=0;
 
-        while(divDec<value){
-            divDec = divDec*10;
-        }
+        for (int i = aux.length()-1; i >=0; i--) {
+            cnt++;
+            decNum = aux.charAt(i) + decNum;
 
-        while (copyValue>10) {
-            divDec = divDec/10;
-            restHigh = copyValue;
-            restLow = restHigh % divDec;
-            aux[i] = ((restHigh - restLow) / divDec);
-            copyValue = restLow;
-            i++;
-            if (copyValue<10){
-                aux[i] = copyValue;
-                break;
+            if(cnt==3 && i!=0){
+                decNum =  "," + decNum;
+
+                cnt =0;
             }
         }
-        return aux;
-    }
-    public String[] decimalForm(int[] brokenNum){
-
-        String[] aux = new String[15];
-        int getInt;
-
-        for (int i = 0; i < 10; i++) {
-            getInt = brokenNum[i];
-            aux[i] = getInt+"";
-        }
-
-        return aux;
+        return decNum;
     }
     public void genClassicPrimeNum(int aux){
         int[] array = new int[aux];
@@ -176,18 +158,7 @@ public class PrimeNumber {
 
     public static void main(String[] args){
         PrimeNumber test = new PrimeNumber();
-        int aux = MyTools.rng(999999);
-        String auxAux = aux+"";
-        String tet="";
+        System.out.println(test.decimalForm());
 
-        for (int i = 0; i <auxAux.length() ; i++) {
-            tet = tet +  test.breakNum(aux)[i];
-        }
-
-        System.out.println("aux:  "+aux);
-        System.out.println("tet:  "+tet);
-        if(auxAux.equals(tet)){
-            System.out.println("CORRECT");
-        }
     }
 }
