@@ -2,11 +2,22 @@ import java.util.Arrays;
 
 public class PrimeNumber {
 
+    private int size(int range){
+        if (range<=3){
+            return range;
+        }else if(range<11){
+            range = 4;
+            return range;
+        } else if (range<=100) {
+            return 27;
+        }
+        return range/2;
+    }
+
     private String breakNum(int value){
         return ""+value;
     }
-    public String decimalForm(){
-        String aux = breakNum(MyTools.rng(999999999));
+    public String decimalForm(String aux){
         String decNum="";
         int cnt=0;
 
@@ -22,8 +33,10 @@ public class PrimeNumber {
         }
         return decNum;
     }
-    public void genClassicPrimeNum(int aux){
-        int[] array = new int[aux];
+    public void genClassicPrimeNum(int number){
+
+
+        int[] array = new int[size(number)];
         int i=0;
         int steps=0;
 
@@ -32,7 +45,7 @@ public class PrimeNumber {
 
         int n;
         steps++;
-        n=aux;
+        n=number;
         steps++;
         int cnt;
         steps++;
@@ -40,8 +53,8 @@ public class PrimeNumber {
         steps++;
 
         steps++;
-        while(aux>=2){
-            if(aux%n-- ==0){
+        while(number>=2){
+            if(number%n-- ==0){
                 steps++;
                 ++cnt;
                 steps++;
@@ -49,9 +62,9 @@ public class PrimeNumber {
                 steps++;
                 if (cnt>2){
                     steps++;
-                    aux--;
+                    number--;
                     steps++;
-                    n = aux;
+                    n = number;
                     steps++;
                     cnt=0;
                     steps++;
@@ -60,18 +73,18 @@ public class PrimeNumber {
 
             steps++;
             if (n==1 && cnt <2){
-               array[i] = aux;
+               array[i] = number;
                i++;
 
                steps++;
-               aux--;
+               number--;
                steps++;
-               n = aux;
+               n = number;
                steps++;
                cnt=0;
             }
         }
-        System.out.println("Classic' steps:  "+steps);
+        System.out.println("Classic' steps:  "+ decimalForm(breakNum(steps)));
     }
 
     public int[] genBetterPrimeNum(int limit){
@@ -79,7 +92,7 @@ public class PrimeNumber {
         int steps=0;
         steps++;
         steps++;
-        int[] auxArray = new int[limit-1];
+        int[] auxArray = new int[size(limit)];
         int i=0;
 
         int aux;
@@ -90,7 +103,7 @@ public class PrimeNumber {
             steps++;
             System.out.println("Your number is the prime 2 or a number less than 2");
             steps++;
-            System.out.println("Better' steps:  "+steps);
+            System.out.println("Better steps:  "+ decimalForm(breakNum(steps)));
 
             auxArray[i] = 2;
             return auxArray;
@@ -113,7 +126,7 @@ public class PrimeNumber {
             auxArray[1] = 2;
 
             steps++;
-            System.out.println("Better' steps:  "+steps);
+            System.out.println("Better steps:  "+ decimalForm(breakNum(steps)));
             System.out.println(Arrays.toString(auxArray));
             return auxArray;
         }
@@ -142,7 +155,7 @@ public class PrimeNumber {
                         auxArray[i] = 2;
 
                         steps++;
-                        System.out.println("Better' steps:  "+steps);
+                        System.out.println("Better steps:  "+ decimalForm(breakNum(steps)));
 
                         return auxArray;
                     }
@@ -152,13 +165,13 @@ public class PrimeNumber {
             }
         }
         steps++;
-        System.out.println("Better' steps:  "+steps);
+        System.out.println("Better steps:  "+ decimalForm(breakNum(steps)));
         return auxArray;
     }
 
     public static void main(String[] args){
         PrimeNumber test = new PrimeNumber();
-        System.out.println(test.decimalForm());
-
+        test.genClassicPrimeNum(9999);
+        test.genBetterPrimeNum(9999);
     }
 }
